@@ -19,7 +19,7 @@ docker exec -it embulk /bin/bash
 embulk run config.yml.liquid
 ```
 
-## Generate original onfig.yml
+## Generate original config.yml
 ```
 vi csv/sample_2.csv
 embulk guess seed.yml -o config_2.yml
