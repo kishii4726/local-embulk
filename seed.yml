@@ -1,0 +1,5 @@
+in:
+  type: file
+  path_prefix: "./csv/sample_2.csv"
+out:
+  type: stdout

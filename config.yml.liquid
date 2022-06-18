@@ -1,0 +1,25 @@
+in:
+  type: file
+  path_prefix: ./csv/sample.csv
+  parser:
+    charset: UTF-8
+    newline: LF
+    type: csv
+    delimiter: ','
+    quote: '"'
+    escape: '"'
+    trim_if_not_quoted: false
+    skip_header_lines: 0
+    allow_extra_columns: false
+    allow_optional_columns: false
+    columns:
+    - {name: id, type: long}
+    - {name: name, type: string}
+out:
+  type: mysql
+  host: embulk-mysql
+  user: embulk
+  password: {{ env.MYSQL_PASSWORD }}
+  database: {{ env.MYSQL_DATABASE }}
+  table: sample_table
+  mode: replace

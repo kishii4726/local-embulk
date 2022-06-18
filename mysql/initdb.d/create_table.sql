@@ -1,0 +1,1 @@
+CREATE TABLE IF NOT EXISTS sample_table (id int, name varchar(50));

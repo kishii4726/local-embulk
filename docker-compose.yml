@@ -1,0 +1,43 @@
+version: "2"
+services:
+
+  mysql:
+    container_name: embulk-mysql
+    image: public.ecr.aws/docker/library/mysql:8.0.29
+    volumes:
+      - type: volume
+        source: db-data
+        target: /var/lib/mysql
+      - type: bind
+        source: ./mysql/mysql.cnf
+        target: /etc/mysql/conf.d/mysql.cnf
+      - type: bind
+        source: ./mysql/initdb.d
+        target: /docker-entrypoint-initdb.d
+    ports:
+      - "13306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: embulk
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      TZ: Asia/Tokyo
+    cap_add:
+      - SYS_NICE
+
+  embulk:
+    container_name: embulk
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    volumes:
+    - type: bind
+      source: .
+      target: /embulk
+    tty: true
+
+volumes:
+  db-data:

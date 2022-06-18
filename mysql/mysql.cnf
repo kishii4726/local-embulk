@@ -1,0 +1,17 @@
+[mysqld]
+default-authentication-plugin = mysql_native_password
+log_timestamps=SYSTEM
+innodb_flush_method = O_DIRECT
+innodb_file_per_table = 1
+character-set-server = utf8mb4
+skip-character-set-client-handshake
+max_allowed_packet = 150M
+
+[client]
+default-character-set = utf8mb4
+
+[mysqldump]
+default-character-set = utf8mb4
+
+[mysql]
+default-character-set = utf8mb4
